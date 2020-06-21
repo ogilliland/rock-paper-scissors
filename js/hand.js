@@ -1,6 +1,9 @@
+var shades = ["#ffdbac", "#e0ac69", "#8d5524"];
+
 function Hand(side) {
 	var self = this;
 	self.side = side;
+	self.skinTone = shades[Math.floor(Math.random()*3)]; // randomise skin tone
 
 	if(side == "left") {
 		var factor = 1;
@@ -20,9 +23,9 @@ function Hand(side) {
 				finger(0, 20, 1.125*factor),
 				finger(0, 60, 1*factor),
 				// thumb first knuckle
-				new Bone(-150*factor, -50, 90*factor, -0.8*factor, 20, [
+				new Bone(-150*factor, -50, 90*factor, -0.6*factor, 20, [
 					// thumb second knuckle
-					new Bone(0, 0, 50*factor, 0.4*factor, 17.5, [
+					new Bone(0, 0, 50*factor, 0.3*factor, 17.5, [
 						// thumb tip
 						new Bone(0, 0, 50*factor, 0.2*factor, 17.5)
 					])
@@ -44,8 +47,6 @@ function Hand(side) {
 
 	self.draw = function(ctx) {
 
-		ctx.lineWidth = 4;
-
 		function drawBone(bone, showSkin = true, showBone = false, dx = 0, dy = 0, dangle = 0) {
 			// modify bone.x and bone.y by remaining angle (dangle)
 			var x1 = dx + bone.x*Math.cos(dangle) - bone.y*Math.sin(dangle);
@@ -63,16 +64,20 @@ function Hand(side) {
 				var sx4 = x2 - bone.skinWidth*Math.sin(dangle + bone.angle);
 				var sy4 = y2 + bone.skinWidth*Math.cos(dangle + bone.angle);
 				// draw skin
-				ctx.fillStyle = "#ffdbac";
+				ctx.lineWidth = 4;
+				ctx.strokeStyle = self.skinTone;
+				ctx.fillStyle = self.skinTone;
 				ctx.beginPath();
 				ctx.moveTo(sx1, sy1);
 				ctx.lineTo(sx2, sy2);
 				ctx.lineTo(sx3, sy3);
 				ctx.lineTo(sx4, sy4);
+				ctx.stroke();
 				ctx.fill();
 			}
 			if(showBone) {
 				// draw bone
+				ctx.lineWidth = 4;
 				ctx.strokeStyle = "red";
 				ctx.beginPath();
 				ctx.moveTo(x1, y1);
