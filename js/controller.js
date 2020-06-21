@@ -1,4 +1,5 @@
 var controls = {
+	"32": "newRound",
 	"49": { // 0 key
 		"player": "left",
 		"shape": "rock"
@@ -28,21 +29,26 @@ var controls = {
 function Controller() {
 	var self = this;
 
-	self.reset = function() {
+	self.resetShapes = function() {
 		self.shapes = {
 			"left": null,
 			"right": null
 		}
 	}
-
-	self.reset();
+	
+	self.resetShapes();
 
 	window.onkeypress = function(e) {
 		var charCode = parseInt((e.which) ? e.which : e.keyCode);
 		input = controls[charCode];
-		
+
 		if(input != undefined) {
-			self.shapes[input.player] = input.shape;
+			if(input == "newRound") {
+				self.newRound = true;
+				self.resetShapes();
+			} else if(input.hasOwnProperty("player") && input.hasOwnProperty("shape")) {
+				self.shapes[input.player] = input.shape;
+			}
 		}
 	}
 }

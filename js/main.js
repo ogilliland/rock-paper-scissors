@@ -1,4 +1,4 @@
-var canvas, ctx, h1, h2, controller;
+var canvas, ctx, game;
 
 function init() {
 	canvas = document.getElementById("canvas");
@@ -6,6 +6,7 @@ function init() {
 	h1 = new Hand("left");
 	h2 = new Hand("right");
 	controller = new Controller();
+	game = new Game(controller, h1, h2);
 }
 
 function updateCanvas() {
@@ -14,9 +15,11 @@ function updateCanvas() {
 }
 
 function draw() {
+	game.update();
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
-	h1.draw(ctx);
-	h2.draw(ctx);
+	game.h1.draw(ctx);
+	game.h2.draw(ctx);
+	game.draw(ctx);
 	requestAnimationFrame(draw);
 }
 
