@@ -1,10 +1,11 @@
-var canvas, ctx, h1, h2;
+var canvas, ctx, h1, h2, controller;
 
 function init() {
 	canvas = document.getElementById("canvas");
 	ctx = canvas.getContext("2d");
 	h1 = new Hand("left");
 	h2 = new Hand("right");
+	controller = new Controller();
 }
 
 function updateCanvas() {
