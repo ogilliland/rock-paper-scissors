@@ -15,20 +15,23 @@ function Hand(side) {
 
 	self.bones = [
 		// forearm
-		new Bone(-400*factor+offset, 400, 500*factor, 0, 50, [
-			// palm
-			new Bone(0, 0, 150*factor, 0, 75, [
-				finger(0, -60, 1.125*factor),
-				finger(0, -20, 1.25*factor),
-				finger(0, 20, 1.125*factor),
-				finger(0, 60, 1*factor),
+		new Bone(-350*factor+offset, 400, 500*factor, 0, 50, [
+			// palm base
+			new Bone(0, 0, 75*factor, 0, 75, [
 				// thumb first knuckle
-				new Bone(-150*factor, -50, 90*factor, -0.6*factor, 20, [
+				new Bone(-80*factor, -50, 90*factor, -0.6*factor, 20, [
 					// thumb second knuckle
 					new Bone(0, 0, 50*factor, 0.3*factor, 17.5, [
 						// thumb tip
 						new Bone(0, 0, 50*factor, 0.2*factor, 17.5)
 					])
+				]),
+				// palm top
+				new Bone(0, 0, 75*factor, 0, 75, [
+					finger(0, -60, 1.125*factor),
+					finger(0, -20, 1.25*factor),
+					finger(0, 20, 1.125*factor),
+					finger(0, 60, 1*factor),
 				])
 			])
 		])

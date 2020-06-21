@@ -35,7 +35,7 @@ function Game(controller, h1, h2) {
 		if(self.timer <= -0.5) {
 			size = 64;
 			if(self.controller.shapes.left == null || self.controller.shapes.right == null ) {
-				mainText = "Whoops... not quick enough";
+				mainText = "Whoops... too slow";
 				subText = "No winners, no points!";
 			} else {
 				if(self.controller.shapes.left == self.controller.shapes.right) {
