@@ -35,7 +35,8 @@ function Controller() {
 			"right": null
 		}
 	}
-	
+
+	self.activeRound = true;
 	self.resetShapes();
 
 	window.onkeypress = function(e) {
@@ -43,10 +44,9 @@ function Controller() {
 		input = controls[charCode];
 
 		if(input != undefined) {
-			if(input == "newRound") {
+			if(input == "newRound" && !self.activeRound) {
 				self.newRound = true;
-				self.resetShapes();
-			} else if(input.hasOwnProperty("player") && input.hasOwnProperty("shape")) {
+			} else if(input.hasOwnProperty("player") && input.hasOwnProperty("shape") && self.activeRound) {
 				self.shapes[input.player] = input.shape;
 			}
 		}
